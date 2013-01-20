@@ -367,12 +367,12 @@ function record_click() {
     $('#record').text('Record')
 
     rec.stop();
-    rec.exportWAV(function(x) {Recorderr.forceDownload(x, 'recording')});
+    rec.exportWAV(function(x) {Recorder.forceDownload(x, 'recording')});
 
   } else {
     $('#record').text('Stop')
 
-    rec = new Recorderr(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
+    rec = new Recorder(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
     rec.record();
     recording = true;
   }
@@ -386,24 +386,6 @@ PARTITION = 1/16;
 
 function r(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function leapCoordsToPixels(leapCoords) {
-  var result = [];
-
-  var coords, newx, newy;
-  for(var i = 0; i < leapCoords.length; i++) {
-    coords = leapCoords[i];
-    newx = (coords.x + (LEAP_X_RANGE / 2)) * (CANVAS_WIDTH / LEAP_X_RANGE);
-    newy = (LEAP_Y_RANGE - coords.y) * (CANVAS_HEIGHT / LEAP_Y_RANGE);
-    result.push({'x': newx, 'y': newy});
-  }
-
-  return result;
-}
-
-function stream_data() {
-  setInterval(update_sounds, 50);
 }
 
 function random_coords() {
@@ -440,11 +422,24 @@ function coords_to_partitions(coords){
   return partitions
 }
 
-function update_sounds() {
-  leap_coords = random_coords();
-  adj_coords = leapCoordsToPixels(leap_coords);
+var latestCoords = {};
+var leapInited = false;
+var interval;
 
-  partitions = coords_to_partitions(adj_coords)
+function receive_leap_motion_coords(coords) {
+  latestCoords = coords;
+  if(!leapInited)
+    interval = setInterval(update_sounds(latestCoords), 50);
+  
+  leapInited = true;
+}
+
+// function stream_data() {
+  
+// }
+
+function update_sounds(coords) {
+  partitions = coords_to_partitions(coords)
 
   Bzz.change(partitions[0]['x']);
   Wood.change(partitions[0]['y']);
