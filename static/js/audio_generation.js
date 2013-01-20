@@ -10,7 +10,25 @@ this.loadBuffer(this.urlList[i],i);}
 var context;
 var bufferLoader;
 var BUFFERS;
-window.onload = init;
+
+var latestCoords = {};
+var leapInited = false;
+var interval;
+
+$(document).ready(init);
+
+//global function to receive coords from motionvisualizer.js:
+receive_leap_motion_coords = function(coords) {
+  latestCoords = coords;
+  if(!leapInited) {
+    interval = setInterval(update_sounds(latestCoords), 50);
+    Ping.audioOn();
+    Bass.audioOn();
+    Bzz.audioOn();
+    Wood.audioOn();
+  }
+  leapInited = true;
+}
 
 function init() {
   context = new webkitAudioContext();
@@ -164,6 +182,14 @@ BG.changeVolume = function(element) {
   var fraction = parseInt(element.value) / parseInt(element.max);
   this.gainNode.gain.value = fraction * fraction;
 };
+
+toVolume = function(x) {
+  BG.gainNode.gain.value = x;
+}
+
+toFreq = function(x) {
+  BG.filter.frequency.value = x*5000;
+}
 
 var tempo = 114*4;
 var interval = (60 / tempo) * 1000;
@@ -422,22 +448,6 @@ function coords_to_partitions(coords){
   return partitions
 }
 
-var latestCoords = {};
-var leapInited = false;
-var interval;
-
-function receive_leap_motion_coords(coords) {
-  latestCoords = coords;
-  if(!leapInited)
-    interval = setInterval(update_sounds(latestCoords), 50);
-  
-  leapInited = true;
-}
-
-// function stream_data() {
-  
-// }
-
 function update_sounds(coords) {
   partitions = coords_to_partitions(coords)
 
@@ -446,3 +456,4 @@ function update_sounds(coords) {
   Bass.change(partitions[1]['x']);
   Ping.change(partitions[1]['y']);
 }
+

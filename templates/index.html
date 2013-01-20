@@ -73,7 +73,7 @@
       <div class="row-fluid">
         <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);" id="intro">
             <center>
-              <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;" type="button" onclick="changeTo('main');">Start Sculpting!</button>
+              <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;" type="button" onclick="changeTo('main');BG.play();">Start Sculpting!</button>
             <br/><br/>
             <hr style="background-color:rgba(238, 238, 238, .5);">
             <p>
@@ -130,7 +130,9 @@
     
 
     </div> <!-- /container -->
-
+    <script src="../static/js/audio_generation.js"></script>
+    <script src="../static/js/recorder.js"></script>
+    <script src="../static/js/recorderWorker.js"></script>
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/leap.js"></script>
     <script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>

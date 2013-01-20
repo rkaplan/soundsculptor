@@ -68,7 +68,7 @@ function handleLeapMove(leapCoords, palm) {
       freq = Math.min(freq, 1.0);
 
       console.log("AYO FREQUENCY CHANGED TO " + freq);
-      //kenny.setFrequency(freq);
+      toFreq(freq);
     }
     if(Math.abs(palm.yVel) > PALM_VELOCITY_THRESHOLD) {
       var pixelY = (LEAP_Y_RANGE - palm.y) * (CANVAS_HEIGHT / LEAP_Y_RANGE);
@@ -79,10 +79,11 @@ function handleLeapMove(leapCoords, palm) {
       vol = Math.min(vol, 1.0);
 
       console.log("AYO VOLUME CHANGED TO " + vol);
-      //kenny.setVolume(vol);
+      toVolume(vol);
     }
 
     //call audio generator:
+    receive_leap_motion_coords(coords);
     console.log()
   }
 }
