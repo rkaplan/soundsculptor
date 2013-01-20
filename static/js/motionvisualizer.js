@@ -81,6 +81,9 @@ function handleLeapMove(leapCoords, palm) {
       console.log("AYO VOLUME CHANGED TO " + vol);
       //kenny.setVolume(vol);
     }
+
+    //call audio generator:
+    console.log()
   }
 }
 
