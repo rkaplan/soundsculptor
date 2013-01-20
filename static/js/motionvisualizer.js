@@ -5,6 +5,8 @@ var text;
 var pointerVisuals;
 var inited = false;
 
+var PALM_VELOCITY_THRESHOLD = 400;
+
 var LEAP_X_RANGE = 360, //x leapCoords range from -180 to 180
     LEAP_Y_RANGE = 460; //y leapCoords range from 0 to 460
 
@@ -33,10 +35,8 @@ function init() {
   inited = true;
 }
 
-function handleLeapMove(leapCoords) {
+function handleLeapMove(leapCoords, palm) {
   var coords = leapCoordsToPixels(leapCoords);
-  // if(coords[0])
-  //   console.log('x: ' + coords[0].x + ', y: ' + coords[0].y);
 
   for(var i = 0; i < coords.length; i++) {
     if(pointerVisuals[i]) {
@@ -55,6 +55,21 @@ function handleLeapMove(leapCoords) {
 
   if(coords.length == 0) {
     stage.clear();  
+  }
+
+  if(palm && leapCoords.length >= 4) {
+    if(Math.abs(palm.xVel) > PALM_VELOCITY_THRESHOLD) {
+      var pixelX = palm.x + (LEAP_X_RANGE / 2) * (CANVAS_WIDTH / LEAP_X_RANGE);
+      var freq = pixelX * (100.0 / CANVAS_WIDTH);
+      console.log("FREQUENCY CHANGED TO " + freq);
+      //kenny.setFrequency(freq);
+    }
+    if(Math.abs(palm.yVel) > PALM_VELOCITY_THRESHOLD) {
+      var pixelY = (LEAP_Y_RANGE - palm.y) * (CANVAS_HEIGHT / LEAP_Y_RANGE);
+      var vol = pixelY * (100.0 / CANVAS_HEIGHT);
+      console.log("LAAAAAAA VOLUME CHANGED TO " + vol);
+      //kenny.setVolume(pixelY);
+    }
   }
 }
 
@@ -131,12 +146,20 @@ Leap.loop(function(frame) {
     newPointables[i] = coords;
   }
 
+  var palm = {};
+  if(frame.hands && frame.hands[0]) {
+    palm.x = frame.hands[0].palmPosition[0];
+    palm.y = frame.hands[0].palmPosition[1];
+    palm.xVel = frame.hands[0].palmVelocity[0];
+    palm.yVel = frame.hands[0].palmVelocity[1];
+  }
+  
   if(oldPointables && newPointables.length == oldPointables.length) {
     newPointables = makePointableIndicesConsistent(newPointables, oldPointables);
   }
 
   if(inited)
-    handleLeapMove(newPointables);
+    handleLeapMove(newPointables, palm);
 
   oldPointables = newPointables;
 });
