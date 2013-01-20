@@ -148,10 +148,11 @@ BG.play = function() {
   filter.type = 0; // LOWPASS
   filter.Q.value = 30;
   filter.frequency.value = 5000;
+  this.filter = filter;
   // Connect source to gainNode, gainNode to filter, filter to destination.
   source1.connect(this.gainNode);
-  this.gainNode.connect(filter);
-  filter.connect(context.destination);
+  this.gainNode.connect(this.filter);
+  this.filter.connect(context.destination);
 
   // Play!
   source1.loop = true;
@@ -166,7 +167,6 @@ BG.play = function() {
 
   // Save source and filterNode for later access.
   this.source1 = source1;
-  this.filter = filter;
 };
 
 BG.stop = function() {
@@ -202,7 +202,8 @@ toVolume = function(x) {
 }
 
 toFreq = function(x) {
-  BG.filter.frequency.value = x*5000;
+  if(BG.filter)
+    BG.filter.frequency.value = x*5000;
 }
 
 var tempo = 114*4;
