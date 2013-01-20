@@ -112,10 +112,10 @@ var recording = false;
 record_click = function () {
   if (recording) {
     rec.stop();
-    rec.exportWAV(function(x) {Recorder.forceDownload(x, 'recording')});
+    rec.exportWAV(function(x) {Recorderr.forceDownload(x, 'recording')});
 
   } else {
-    rec = new Recorder(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
+    rec = new Recorderr(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
     rec.record();
     recording = true;
   }
