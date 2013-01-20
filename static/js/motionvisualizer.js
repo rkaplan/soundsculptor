@@ -57,29 +57,39 @@ function handleLeapMove(leapCoords, palm) {
     stage.clear();  
   }
 
-  if(palm && leapCoords.length >= 4) {
-    if(Math.abs(palm.xVel) > PALM_VELOCITY_THRESHOLD) {
-      var handRangeImmobilityFactor = 7;
-      var pixelX = palm.x + (LEAP_X_RANGE / 2) * (CANVAS_WIDTH / LEAP_X_RANGE);
-      var freq = ((pixelX * (100.0 / CANVAS_WIDTH) - 40) * handRangeImmobilityFactor) / 100.0;
+  if(palm) {
 
-      // ensure freq is within range
-      freq = Math.max(freq, 0.0);
-      freq = Math.min(freq, 1.0);
+    if(leapCoords.length >= 4) {
+      if(Math.abs(palm.xVel) > PALM_VELOCITY_THRESHOLD) {
+        var handRangeImmobilityFactor = 7;
+        var pixelX = palm.x + (LEAP_X_RANGE / 2) * (CANVAS_WIDTH / LEAP_X_RANGE);
+        var freq = ((pixelX * (100.0 / CANVAS_WIDTH) - 40) * handRangeImmobilityFactor) / 100.0;
 
-      console.log("AYO FREQUENCY CHANGED TO " + freq);
-      //kenny.setFrequency(freq);
+        // ensure freq is within range
+        freq = Math.max(freq, 0.0);
+        freq = Math.min(freq, 1.0);
+
+        if (canvasVisible) {
+          toFreq(freq); //audio generator call
+        }
+      }
+      if(Math.abs(palm.yVel) > PALM_VELOCITY_THRESHOLD) {
+        var pixelY = (LEAP_Y_RANGE - palm.y) * (CANVAS_HEIGHT / LEAP_Y_RANGE);
+        var vol = (CANVAS_HEIGHT - pixelY) * (1.0 / CANVAS_HEIGHT);
+
+        //ensure vol is within range
+        vol = Math.max(vol, 0.0);
+        vol = Math.min(vol, 1.0);
+        if (canvasVisible) {
+          toVolume(vol); //audio generator call
+        }
+      }
     }
-    if(Math.abs(palm.yVel) > PALM_VELOCITY_THRESHOLD) {
-      var pixelY = (LEAP_Y_RANGE - palm.y) * (CANVAS_HEIGHT / LEAP_Y_RANGE);
-      var vol = (CANVAS_HEIGHT - pixelY) * (1.0 / CANVAS_HEIGHT);
 
-      //ensure vol is within range
-      vol = Math.max(vol, 0.0);
-      vol = Math.min(vol, 1.0);
-
-      console.log("AYO VOLUME CHANGED TO " + vol);
-      //kenny.setVolume(vol);
+    //call audio generator:
+    if(coords.length != 0 && canvasVisible) {
+      console.log(coords);
+      receive_leap_motion_coords(coords);
     }
   }
 }
