@@ -19,13 +19,12 @@
       function changeTo (newHero) {
         var heros = ['main', 'intro', 'about'];
         for (var i in heros) {
-          if (newHero === heros[i]) {
-            $('#' + newHero).show('slow');
+          if (newHero !== heros[i]) {
+            $('#' + heros[i]).fadeOut('slow'); 
           }
-          else {
-           $('#' + heros[i]).hide('slow'); 
-          }
+          heros.splice(i,1);
         }
+        $('#' + newHero).fadeIn('slow');
       }
     </script>
 
