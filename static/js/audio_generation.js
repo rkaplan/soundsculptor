@@ -164,9 +164,6 @@ BG.play = function() {
 
   record_click();
 
-  // Enable record button
-  $('#record').removeAttr('disabled');
-
   // Save source and filterNode for later access.
   this.source1 = source1;
   this.filter = filter;
