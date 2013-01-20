@@ -25,9 +25,8 @@
     <script src="../static/js/jquery.min.js"></script>
   </head>
 
-  <body style="background-color:white;">
+  <body style="background-color:#333333;">
 
-<<<<<<< HEAD
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner" style="background-color:rgba(238, 238, 238, .5);">
         <div class="container" style="height: 100">
@@ -36,28 +35,8 @@
             <ul class="nav" style="font-size: 22px">
               <li id="homenav" class="active"><a href="/" style="color:black;">Home</a></li>
               <li id="aboutnav"><a href="about" style="color:black;">About</a></li>
-=======
-
-    <div class="navbar navbar-inverse navbar-fixed-top" style="line-height:0px">
-      <div class="navbar-inner" style="background-color:rgba(238, 238, 238, .5); height: 50px">
-        <div class="container">
-          <!-- <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a> -->
-          <center>
-          <a class="brand" href="#" onclick="changeTo('intro');$('#homenav').toggleClass('active');$('#aboutnav').removeClass('active');" style="color:black; line-height: 0px; height: 20px; padding: 13px">
-                  <img src="../static/img/logo2.png"> 
-          </a>
-          <div class="nav-collapse collapse">
-            <ul class="nav" style="font-size: 23px">
-              <li id="homenav" class="active"><a href="#" onclick="changeTo('intro');$('#homenav').addClass('active');$('#aboutnav').removeClass('active');" style="color:black;">Home</a></li>
-              <li id="aboutnav"><a href="#about" onclick="changeTo('about');$('#aboutnav').addClass('active');$('#homenav').removeClass('active');" style="color:black;">About</a></li>
->>>>>>> e2418fea96ac18bc9bc0b2f3909605978db48a4f
             </ul>
           </div><!--/.nav-collapse -->
-        </center>
         </div>
       </div>
     </div>
@@ -69,7 +48,7 @@
     
       <br/>
       <div class="row-fluid">
-        <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);" id="intro">
+        <div class="hero-unit" style="background-color:white; z-index: 10;" id="intro">
             <center>
               <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;" type="button" onclick="changeTo('main');BG.play();">Start Sculpting!</button>
             <br/><br/>
@@ -86,8 +65,8 @@
             </center>
         </div>
 
-        <div style="position:absolute;top:50px;float:left;margin-top:0;margin-left:0;width:100%;">
-          <canvas id="interfaceCanvas" style="width:100%;height:100%;" style="background: #333333;"></canvas>
+        <div style="position:absolute;top:50px;float:left;margin-top:0;margin-left:0;width:100%; z-index: -1;">
+          <canvas id="interfaceCanvas" style="width:100%;height:100%; background-color: #333333;"></canvas>
         </div>
       </div>
     
