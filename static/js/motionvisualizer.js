@@ -8,7 +8,7 @@ var inited = false;
 var PALM_VELOCITY_THRESHOLD = 400;
 
 var LEAP_X_RANGE = 360, //x leapCoords range from -180 to 180
-    LEAP_Y_RANGE = 460; //y leapCoords range from 0 to 460
+    LEAP_Y_RANGE = 480; //y leapCoords range from 0 to 460
 
 var CANVAS_WIDTH = 960,
     CANVAS_HEIGHT = 400;
@@ -59,16 +59,27 @@ function handleLeapMove(leapCoords, palm) {
 
   if(palm && leapCoords.length >= 4) {
     if(Math.abs(palm.xVel) > PALM_VELOCITY_THRESHOLD) {
+      var handRangeImmobilityFactor = 7;
       var pixelX = palm.x + (LEAP_X_RANGE / 2) * (CANVAS_WIDTH / LEAP_X_RANGE);
-      var freq = pixelX * (100.0 / CANVAS_WIDTH);
-      console.log("FREQUENCY CHANGED TO " + freq);
+      var freq = ((pixelX * (100.0 / CANVAS_WIDTH) - 40) * handRangeImmobilityFactor) / 100.0;
+
+      // ensure freq is within range
+      freq = Math.max(freq, 0.0);
+      freq = Math.min(freq, 1.0);
+
+      console.log("AYO FREQUENCY CHANGED TO " + freq);
       //kenny.setFrequency(freq);
     }
     if(Math.abs(palm.yVel) > PALM_VELOCITY_THRESHOLD) {
       var pixelY = (LEAP_Y_RANGE - palm.y) * (CANVAS_HEIGHT / LEAP_Y_RANGE);
-      var vol = pixelY * (100.0 / CANVAS_HEIGHT);
-      console.log("LAAAAAAA VOLUME CHANGED TO " + vol);
-      //kenny.setVolume(pixelY);
+      var vol = (CANVAS_HEIGHT - pixelY) * (1.0 / CANVAS_HEIGHT);
+
+      //ensure vol is within range
+      vol = Math.max(vol, 0.0);
+      vol = Math.min(vol, 1.0);
+
+      console.log("AYO VOLUME CHANGED TO " + vol);
+      //kenny.setVolume(vol);
     }
   }
 }
