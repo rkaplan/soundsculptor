@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sound Sculptor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="../static/css/bootstrap-metro.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.png" />
+
+    <script src="../static/js/jquery.min.js"></script>
+  </head>
+
+  <body style="background-color:black;">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner" style="background-color:rgba(255, 255, 255, .05);">
+        <div class="container" style="height: 100;">
+          <a class="brand" href="/" style="color:black; height: 50px;"><img src="../static/img/logo.png"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav" style="font-size: 22px;">
+              <li id="homenav" class="active"><a href="/" style="color:black;">Home</a></li>
+              <li id="aboutnav"><a href="about" style="color:black;">About</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <br/>
+    <br/>
+
+    <div class="container-fluid">
+    
+      <br/>
+        <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);color:white;" id="about">
+            <center>
+              <h1 style="color:black;">About SoundSculptor</h1>
+            <hr style="background-color:rgba(238, 238, 238, .5);">
+            <p style="color:black;">
+              Created using the Leap Motion, Web Audio, SoundCloud, and Dropbox APIs, SoundSculptor allows anyone to invent and record music on the spot just by using their hands. Upload your masterpiece to SoundCloud right after your sculpt it with simple hand motion.
+            </p>
+            <hr style="background-color:rgba(238, 238, 238, .5);">
+            <p>
+              <div class="row-fluid"/>
+              
+               <div class="span4"></div>
+
+               <div class="span1">
+                <a href="http://developers.soundcloud.com/"><img src="../static/img/soundcloud.png"></a>
+               </div>
+             
+              </div>
+              <div class="span1">
+               <a href="https://devcenter.heroku.com/"><img src="../static/img/heroku.png"></a>
+              </div>
+
+              <div class="span4"></div>
+
+            </center>
+            </p>
+        </div>
+      </div>
+    
+
+    </div> <!-- /container -->
+    <script src="../static/js/audio_generation.js"></script>
+    <script src="../static/js/recorder.js"></script>
+    <script src="../static/js/recorderWorker.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/leap.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
+    <script src="http://code.createjs.com/tweenjs-0.3.0.min.js"></script>
+    <script src="../static/js/motionvisualizer.js"></script>
+  </body>
+</html>

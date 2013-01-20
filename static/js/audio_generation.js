@@ -294,8 +294,8 @@ Bzz.random = function () {
   Bzz.change(n);
 }
 
-/* Bass Sound Handler */
-var Bass = {
+  /* Bass Sound Handler */
+  var Bass = {
 };
 
 var bass_vol = 0;

@@ -10,8 +10,8 @@ var PALM_VELOCITY_THRESHOLD = 400;
 var LEAP_X_RANGE = 360, //x leapCoords range from -180 to 180
     LEAP_Y_RANGE = 480; //y leapCoords range from 0 to 460
 
-var CANVAS_WIDTH = 960,
-    CANVAS_HEIGHT = 400;
+var CANVAS_WIDTH = 1150,
+    CANVAS_HEIGHT = 600;
 
 $(document).ready(init);
 
@@ -81,10 +81,12 @@ function handleLeapMove(leapCoords, palm) {
         vol = Math.max(vol, 0.0);
         vol = Math.min(vol, 1.0);
         if (canvasVisible) {
+          console.log('vol:')
           toVolume(vol); //audio generator call
         }
       }
     }
+
 
     //call audio generator:
     if(coords.length != 0 && canvasVisible) {
@@ -141,7 +143,7 @@ function PointerVisual(coords) {
       // draw the circle, and put it on stage:
       var circle = new createjs.Shape();
       circle.graphics.setStrokeStyle(15);
-      circle.graphics.beginStroke("#113355");
+      circle.graphics.beginStroke("#a25400");
       circle.graphics.drawCircle(0,0,(i+1)*4);
       circle.alpha = 1-i*0.02;
       circle.x = coords.x;
