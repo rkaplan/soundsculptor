@@ -14,13 +14,16 @@ var BUFFERS;
 var latestCoords = {};
 var leapInited = false;
 var interval;
+var canvasVisible = false;
 
 $(document).ready(init);
 
 //global function to receive coords from motionvisualizer.js:
 receive_leap_motion_coords = function(coords) {
   latestCoords = coords;
+  console.log('re')
   if(!leapInited) {
+    console.log('asdf')
     interval = setInterval(update_sounds(latestCoords), 50);
     Ping.audioOn();
     Bass.audioOn();
@@ -122,6 +125,8 @@ BG.gainNode = null;
 var rec = null; 
 
 BG.play = function() {
+  canvasVisible = true;
+
   // Create gain node (volume)
   this.gainNode = context.createGainNode();
   // Create the source.
@@ -431,10 +436,15 @@ function random_coords() {
 function coords_to_partitions(coords){
   // normalize coordinates to 0<c<1
   partitions = []
+  if (coords.length > 2) {
+    var len = 2;
+  } else {
+    var len = coords.length;
+  }
 
   // use only first two sets of coordinates (two fingers)
   var coord, norm_x, norm_y;
-  for(var i = 0; i < 2; i++) {
+  for(var i = 0; i < len; i++) {
     coord = coords[i];
     norm_x = coord['x'] / CANVAS_WIDTH;
     norm_y = coord['y'] / CANVAS_HEIGHT;
@@ -449,11 +459,15 @@ function coords_to_partitions(coords){
 }
 
 function update_sounds(coords) {
-  partitions = coords_to_partitions(coords)
+  partitions = coords_to_partitions(coords);
+  console.log('SOUND' + partitions[0]['x']);
 
   Bzz.change(partitions[0]['x']);
   Wood.change(partitions[0]['y']);
+
+  if (partitions.length >= 2){ 
   Bass.change(partitions[1]['x']);
   Ping.change(partitions[1]['y']);
+}
 }
 
