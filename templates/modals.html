@@ -299,6 +299,7 @@
     </script>
 
     <script>
+    var me = null;
     function soundCloudAuth() {
       // initialize client with app credentials
       SC.initialize({
@@ -316,16 +317,21 @@
         SC.record({
             start: function() {
               window.setTimeout(function() {
-                SC.recordStop(); SC.recordUpload({track: { title: 'This is my sound' }});}, // put .wav file here or something
-                5000);
+                SC.recordStop(); 
+                SC.recordUpload({track: { title: 'This is my sound' }});
+              }, 5000);
             }
         });
       })
     }
-
+    var token = null;
     $.post('https://api.dropbox.com/1/oauth/request_token', function (data) {
       // oauth_token_secret=b9q1n5il4lcc&oauth_token=mh7an9dkrg59
-      
+      token = data;
+    })
+    $.popupWindow({
+      windowURL: 'https://www.dropbox.com/1/oauth/authorize?oauth_token=' + token.oauth_token + '&oauth_callback=' + 'http://soundsculptor.herokuapp.com/dropbox',
+      windowName: 'Dropbox Authentication'
     })
     </script>
 

@@ -367,12 +367,12 @@ function record_click() {
     $('#record').text('Record')
 
     rec.stop();
-    rec.exportWAV(function(x) {Recorder.forceDownload(x, 'recording')});
+    rec.exportWAV(function(x) {Recorderr.forceDownload(x, 'recording')});
 
   } else {
     $('#record').text('Stop')
 
-    rec = new Recorder(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
+    rec = new Recorderr(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
     rec.record();
     recording = true;
   }
