@@ -43,23 +43,27 @@
     <script src="../static/js/jquery.min.js"></script>
   </head>
 
-  <body style="background-image:url(http://placedog.com/1280/800);" onload="init();">
+  <!--<body style="background-image:url(http://placedog.com/1280/800);" onload="init();">-->
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner" style="background-color:rgba(238, 238, 238, .5);">
-        <div class="container" style="height: 100">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="line-height:0px">
+      <div class="navbar-inner" style="background-color:rgba(238, 238, 238, .5); height: 50px">
+        <div class="container">
           <!-- <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a> -->
-          <a class="brand" href="#" onclick="changeTo('intro');$('#homenav').toggleClass('active');$('#aboutnav').removeClass('active');" style="color:black;"><img src="../static/img/logo.png"></a>
+          <center>
+          <a class="brand" href="#" onclick="changeTo('intro');$('#homenav').toggleClass('active');$('#aboutnav').removeClass('active');" style="color:black; line-height: 0px; height: 20px; padding: 13px">
+                  <img src="../static/img/logo2.png"> 
+          </a>
           <div class="nav-collapse collapse">
-            <ul class="nav" style="font-size: 22px">
+            <ul class="nav" style="font-size: 23px">
               <li id="homenav" class="active"><a href="#" onclick="changeTo('intro');$('#homenav').addClass('active');$('#aboutnav').removeClass('active');" style="color:black;">Home</a></li>
               <li id="aboutnav"><a href="#about" onclick="changeTo('about');$('#aboutnav').addClass('active');$('#homenav').removeClass('active');" style="color:black;">About</a></li>
             </ul>
           </div><!--/.nav-collapse -->
+        </center>
         </div>
       </div>
     </div>
