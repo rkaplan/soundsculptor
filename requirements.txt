@@ -1,5 +1,9 @@
 Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
-distribute==0.6.31
+distribute==0.6.27
+fudge==1.0.3
+requests==1.1.0
+simplejson==3.0.7
+soundcloud==0.3.5
 wsgiref==0.1.2

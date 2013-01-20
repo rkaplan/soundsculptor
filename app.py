@@ -1,5 +1,6 @@
 import os
 import jinja2
+import soundcloud
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -19,6 +20,14 @@ def modals():
 @app.route('/callback')
 def back():
 	return render_template('callback.html')
+
+@app.route('/dropbox')
+def dropbox():
+	return render_template('dropbox.html')
+
+# @app.route('/soundcloud')
+# def soundcloud():
+# 	client = soundcloud.Client(access_token='c62653f616ed117b1d19068691b24234')
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.

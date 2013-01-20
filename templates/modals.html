@@ -66,6 +66,45 @@
       <div class="row-fluid">
         <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);" id="intro">
             <center>
+                  <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="../static/js/recorder.js"></script>
+    <script src="../static/js/recorderWorker.js"></script>
+    <script src="../static/js/audio_generation.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+
+
+  <section id="play">
+    <h1><button id="record" onclick="record_click()" disabled>Record</button></h1>
+
+    <h3>Background Beat</h3>
+    <p><input type="button" onclick="BG.toggle();" value="Play/Pause">
+    Frequency: <input type="range" min="0" max="1" step="0.01" value="1" onchange="BG.changeFrequency(this);">
+    Quality: <input type="range" min="0" max="1" step="0.01" value="1" onchange="BG.changeQuality(this);">
+    Volume: <input type="range" min="0" max="100" value="100" onchange="BG.changeVolume(this);"></p>
+    <h3>Wood</h3>
+    <p><input type="button" onclick="Wood.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Wood.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Wood.mute();" value="Mute"></p>
+
+    <h3>Bzz</h3>  
+    <p><input type="button" onclick="Bzz.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Bzz.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Bzz.mute();" value="Mute"></p>
+
+    <h3>Bass</h3>  
+    <p><input type="button" onclick="Bass.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Bass.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Bass.mute();" value="Mute"></p>
+
+    <h3>Ping</h3>  
+    <p><input type="button" onclick="Ping.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Ping.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Ping.mute();" value="Mute"></p>
+
+  </section>
               <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;" type="button" onclick="changeTo('main');">Start Sculpting!</button>
             <br/><br/>
             <hr style="background-color:rgba(238, 238, 238, .5);">
@@ -127,7 +166,7 @@
               <h3>Share your song!</h3>
             </div>
             <div class="modal-body">
-              <a href="#" onclick="soundCloudAuth();"><img src="../static/img/connectwithsc.png" alt="connect with SoundCloud"></a>
+              <a href="#" onclick="soundCloudAuth();"><div id="sc"><img src="../static/img/connectwithsc.png" alt="connect with SoundCloud"></div></a>
               <p>Save to Dropbox!</p>
               <p>Make a new song!</p>
             </div>
@@ -168,7 +207,6 @@
     <script type="text/javascript" src="http://code.createjs.com/tweenjs-0.3.0.min.js"></script>
 
     <script>
-        console.log('hello from the top of russells script!');
         var canvas;
         var stage;
         // var tweens;
@@ -186,9 +224,6 @@
           }
 
           this.moveTo = function(coords) {
-            console.log("moving to: ");
-            console.log(coords);
-
             for (var i=0; i<circleCount; i++) {
               var ref = this.tweens[i].ref;
               var tween = this.tweens[i].tween;
@@ -223,7 +258,6 @@
 
           canvas = document.getElementById("interfaceCanvas");
           stage = new createjs.Stage(canvas);
-          console.log('stage inited');
           stage.enableMouseOver(10);
           createjs.Touch.enable(stage);
 
@@ -265,20 +299,40 @@
     </script>
 
     <script>
+    var me = null;
     function soundCloudAuth() {
       // initialize client with app credentials
       SC.initialize({
         client_id: 'c62653f616ed117b1d19068691b24234',
-        redirect_uri: '/callback'
+        redirect_uri: 'http://soundsculptor.herokuapp.com/callback'
       });
 
       // initiate auth popup
       SC.connect(function() {
-        SC.get('/me', function(me) { 
-          alert('Hello, ' + me.username); 
+        SC.get('/me', function(lme) { 
+          $('#sc').html('Uploaded!');
+          loggedIn = true;
+          me = lme;
         });
-      });
+        SC.record({
+            start: function() {
+              window.setTimeout(function() {
+                SC.recordStop(); 
+                SC.recordUpload({track: { title: 'This is my sound' }});
+              }, 5000);
+            }
+        });
+      })
     }
+    var token = null;
+    $.post('https://api.dropbox.com/1/oauth/request_token', function (data) {
+      // oauth_token_secret=b9q1n5il4lcc&oauth_token=mh7an9dkrg59
+      token = data;
+    })
+    $.popupWindow({
+      windowURL: 'https://www.dropbox.com/1/oauth/authorize?oauth_token=' + token.oauth_token + '&oauth_callback=' + 'http://soundsculptor.herokuapp.com/dropbox',
+      windowName: 'Dropbox Authentication'
+    })
     </script>
 
   </body>
