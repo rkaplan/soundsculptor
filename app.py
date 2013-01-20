@@ -21,6 +21,10 @@ def modals():
 def back():
 	return render_template('callback.html')
 
+@app.route('/about')
+def back():
+	return render_template('about.html')
+
 @app.route('/dropbox')
 def dropbox():
 	return render_template('dropbox.html')
