@@ -66,6 +66,45 @@
       <div class="row-fluid">
         <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);" id="intro">
             <center>
+                  <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="../static/js/recorder.js"></script>
+    <script src="../static/js/recorderWorker.js"></script>
+    <script src="../static/js/audio_generation.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+
+
+  <section id="play">
+    <h1><button id="record" onclick="record_click()" disabled>Record</button></h1>
+
+    <h3>Background Beat</h3>
+    <p><input type="button" onclick="BG.toggle();" value="Play/Pause">
+    Frequency: <input type="range" min="0" max="1" step="0.01" value="1" onchange="BG.changeFrequency(this);">
+    Quality: <input type="range" min="0" max="1" step="0.01" value="1" onchange="BG.changeQuality(this);">
+    Volume: <input type="range" min="0" max="100" value="100" onchange="BG.changeVolume(this);"></p>
+    <h3>Wood</h3>
+    <p><input type="button" onclick="Wood.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Wood.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Wood.mute();" value="Mute"></p>
+
+    <h3>Bzz</h3>  
+    <p><input type="button" onclick="Bzz.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Bzz.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Bzz.mute();" value="Mute"></p>
+
+    <h3>Bass</h3>  
+    <p><input type="button" onclick="Bass.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Bass.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Bass.mute();" value="Mute"></p>
+
+    <h3>Ping</h3>  
+    <p><input type="button" onclick="Ping.audioOn();" value="Play"></p> 
+    <p><input type="button" onclick="Ping.random();" value="RANDOM"></p> 
+    <p><input type="button" onclick="Ping.mute();" value="Mute"></p>
+
+  </section>
               <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;" type="button" onclick="changeTo('main');">Start Sculpting!</button>
             <br/><br/>
             <hr style="background-color:rgba(238, 238, 238, .5);">
