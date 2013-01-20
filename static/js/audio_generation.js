@@ -107,6 +107,20 @@ function init() {
   bufferLoader.load();
 }
 
+var recording = false;
+
+record_click = function () {
+  if (recording) {
+    rec.stop();
+    rec.exportWAV(function(x) {Recorder.forceDownload(x, 'recording')});
+
+  } else {
+    rec = new Recorder(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
+    rec.record();
+    recording = true;
+  }
+}
+
 function storeBuffers(bufferList) {
   // stores audio buffers in BUFFERS
   BUFFERS = bufferList;
@@ -143,10 +157,12 @@ BG.play = function() {
   source1.loop = true;
   source1.noteOn(0);
 
-  Wood.play()
-  Bzz.play()
-  Bass.play()
-  Ping.play()
+  Wood.play();
+  Bzz.play();
+  Bass.play();
+  Ping.play();
+
+  record_click();
 
   // Enable record button
   $('#record').removeAttr('disabled');
@@ -385,24 +401,6 @@ Ping.audioOn = function () {
 Ping.random = function () {
   var n = Math.floor(Math.random()*16) + 49;
   Ping.change(n);
-}
-
-var recording = false;
-
-function record_click() {
-  if (recording) {
-    $('#record').text('Record')
-
-    rec.stop();
-    rec.exportWAV(function(x) {Recorder.forceDownload(x, 'recording')});
-
-  } else {
-    $('#record').text('Stop')
-
-    rec = new Recorder(BG.filter, {'workerPath': '../static/js/recorderWorker.js'});
-    rec.record();
-    recording = true;
-  }
 }
 
 LEAP_X_RANGE = 360;

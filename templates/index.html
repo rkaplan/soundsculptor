@@ -136,6 +136,14 @@ bottom: 15px;text-shadow:0px 2px 3px rgb(75, 75, 75);">About</a></li>
     <script src="../static/js/audio_generation.js"></script>
     <script src="../static/js/recorder.js"></script>
     <script src="../static/js/recorderWorker.js"></script>
+    <script>
+      $(document).keydown(function(e){
+        if(e.which == 32) {// space bar
+          record_click();
+          e.preventDefault();
+        }
+      });
+    </script>
 
     <h6 style="color: white;
 text-align: center;position:relative;top:50px;">PennApps 2013</h6>
