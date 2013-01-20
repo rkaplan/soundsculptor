@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sound Sculptor</title>
+    <title>SoundSculptr</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,35 +33,27 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../static/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../static/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../static/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../static/ico/apple-touch-icon-57-precomposed.png">
-               <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico" />
 
     <script src="../static/js/jquery.min.js"></script>
   </head>
 
-  <body>
-
+  <body style="background-image:url(../static/img/bg.png);">
 
     <div class="navbar navbar-inverse navbar-fixed-top" style="line-height:0px">
-      <div class="navbar-inner" style="background-color:rgba(238, 238, 238, .5); height: 50px">
+      <div class="navbar-inner" style="background-color:rgba(170, 170, 170, 0.54); height: 50px">
         <div class="container">
-          <!-- <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a> -->
           <center>
           <a class="brand" href="#" onclick="changeTo('intro');$('#homenav').toggleClass('active');$('#aboutnav').removeClass('active');" style="color:black; line-height: 0px; height: 20px; padding: 13px">
-                  <img src="../static/img/logo2.png"> 
+                  <img src="../static/img/orangelogo.png" style="position: relative;
+bottom: 9px;height:48px;"> 
           </a>
           <div class="nav-collapse collapse">
             <ul class="nav" style="font-size: 23px">
-              <li id="homenav" class="active"><a href="#" onclick="changeTo('intro');$('#homenav').addClass('active');$('#aboutnav').removeClass('active');" style="color:black;">Home</a></li>
-              <li id="aboutnav"><a href="#about" onclick="changeTo('about');$('#aboutnav').addClass('active');$('#homenav').removeClass('active');" style="color:black;">About</a></li>
+              <li id="homenav" class="active"><a href="#" onclick="changeTo('intro');$('#homenav').addClass('active');$('#aboutnav').removeClass('active');" style="color:rgb(192, 192, 192);position: relative;
+bottom: 15px;text-shadow:0px 2px 3px rgb(75, 75, 75);">Home</a></li>
+              <li id="aboutnav"><a href="#about" onclick="changeTo('about');$('#aboutnav').addClass('active');$('#homenav').removeClass('active');" style="color:rgb(192, 192, 192);position: relative;
+bottom: 15px;text-shadow:0px 2px 3px rgb(75, 75, 75);">About</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </center>
@@ -76,9 +68,9 @@
     
       <br/>
       <div class="row-fluid">
-        <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);" id="intro">
+        <div class="hero-unit" style="background-color:white;" id="intro">
             <center>
-              <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;" type="button" onclick="changeTo('main');BG.play();">Start Sculpting!</button>
+              <button class="btn btn-large btn-primary" style="width:60%;font-size:250%;height:120px;margin-left:auto;background-color:white;color:gray;text-shadow: 1px 1px 2px rgb(90, 90, 90);" type="button" onclick="changeTo('main');BG.play()">Start Sculpting!</button>
             <br/><br/>
             <hr style="background-color:rgba(238, 238, 238, .5);">
             <p>
@@ -93,7 +85,7 @@
             </center>
         </div>
 
-        <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);display:none;color:white;" id="about">
+        <div class="hero-unit" style="background-color:white;display:none;color:white;" id="about">
             <center>
               <h1 style="color:black;">About SoundSculptor</h1>
             <hr style="background-color:rgba(238, 238, 238, .5);">
@@ -128,20 +120,25 @@
         </div>
 
 
-        <div class="hero-unit" style="background-color:rgba(238, 238, 238, .5);display:none;color:white;" id="main">
-            <canvas id="interfaceCanvas" width="960" height="400" style="background: #333333;"></canvas>
+        <div class="hero-unit" style="background-color:transparent;display:none;color:white;" id="main">
+            <canvas id="interfaceCanvas" width="1260" height="600" style="background: #333333;margin-left:auto;margin-right:auto"></canvas>
         </div>
       </div>
     
 
     </div> <!-- /container -->
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/leap.js"></script>
+    <script type="text/javascript" src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
+    <script type="text/javascript" src="http://code.createjs.com/tweenjs-0.3.0.min.js"></script>
+    <script src="../static/js/motionvisualizer.js"></script>
     <script src="../static/js/audio_generation.js"></script>
     <script src="../static/js/recorder.js"></script>
     <script src="../static/js/recorderWorker.js"></script>
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/leap.js"></script>
-    <script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
-    <script src="http://code.createjs.com/tweenjs-0.3.0.min.js"></script>
-    <script src="../static/js/motionvisualizer.js"></script>
+
+    <h6 style="color: white;
+text-align: center;position:relative;top:50px;">PennApps 2013</h6>
+
   </body>
 </html>

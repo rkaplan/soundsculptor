@@ -20,16 +20,13 @@ $(document).ready(init);
 
 //global function to receive coords from motionvisualizer.js:
 receive_leap_motion_coords = function(coords) {
-  latestCoords = coords;
-  console.log('re')
   if(!leapInited) {
-    console.log('asdf')
-    interval = setInterval(update_sounds(latestCoords), 50);
     Ping.audioOn();
     Bass.audioOn();
     Bzz.audioOn();
     Wood.audioOn();
   }
+  update_sounds(coords);
   leapInited = true;
 }
 
@@ -144,7 +141,6 @@ BG.play = function() {
 
   // Play!
   source1.loop = true;
-
   source1.noteOn(0);
 
   Wood.play()
@@ -243,7 +239,7 @@ Wood.change = function (x) {
 }
 
 Wood.audioOn = function () {
-  wood_vol = 0.75;
+  wood_vol = .90;
 }
 
 Wood.random = function () {
@@ -257,7 +253,7 @@ var Bzz = {
 };
 
 var bzz_vol = 0;
-var bzz_track = 28;
+var bzz_track = 25;
 
 Bzz.play = function() {
   function playSoundBzz(buffer) {
@@ -290,7 +286,7 @@ Bzz.change = function (x) {
 }
 
 Bzz.audioOn = function () {
-  bzz_vol = 0.35;
+  bzz_vol = 0.5;
 }
 
 Bzz.random = function () {
@@ -298,8 +294,8 @@ Bzz.random = function () {
   Bzz.change(n);
 }
 
-/* Bass Sound Handler */
-var Bass = {
+  /* Bass Sound Handler */
+  var Bass = {
 };
 
 var bass_vol = 0;
@@ -337,7 +333,7 @@ Bass.change = function (x) {
 }
 
 Bass.audioOn = function () {
-  bass_vol = 0.4;
+  bass_vol = 0.8;
 }
 
 Bass.random = function () {
@@ -383,7 +379,7 @@ Ping.change = function (x) {
 }
 
 Ping.audioOn = function () {
-  ping_vol = 0.3;
+  ping_vol = 0.65;
 }
 
 Ping.random = function () {
@@ -460,14 +456,14 @@ function coords_to_partitions(coords){
 
 function update_sounds(coords) {
   partitions = coords_to_partitions(coords);
-  console.log('SOUND' + partitions[0]['x']);
+  console.log(partitions);
 
-  Bzz.change(partitions[0]['x']);
+  Bzz.change(partitions[0]['x']+17);
   Wood.change(partitions[0]['y']);
 
   if (partitions.length >= 2){ 
-  Bass.change(partitions[1]['x']);
-  Ping.change(partitions[1]['y']);
-}
+    Bass.change(partitions[1]['x']+33);
+    Ping.change(partitions[1]['y']+49);
+  }
 }
 

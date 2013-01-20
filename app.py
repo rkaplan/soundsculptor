@@ -35,6 +35,10 @@ def back():
 	access_token = client.exchange_token(code)
 	return render_template('callback.html').set_cookie('access_token', access_token)
 
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
 @app.route('/dropbox')
 def dropbox():
 	return render_template('dropbox.html')
