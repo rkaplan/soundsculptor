@@ -88,7 +88,6 @@ function handleLeapMove(leapCoords, palm) {
 
     //call audio generator:
     if(coords.length != 0 && canvasVisible) {
-      console.log(coords);
       receive_leap_motion_coords(coords);
     }
   }
